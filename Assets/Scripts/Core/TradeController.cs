@@ -5,37 +5,35 @@ public class TradeController : MonoBehaviour
     [SerializeField] private PlayerWallet wallet;
     [SerializeField] private Inventory inventory;
     [SerializeField] private HudController hud;
+    [SerializeField] private ProductData product;
 
-    [SerializeField] private int buyPrice = 10;
-    [SerializeField] private int sellPrice = 15;
-
-    public void BuyNovaCandy()
+    public void BuyProduct()
     {
-        if (wallet.SpendCredits(buyPrice))
+        if (wallet.SpendCredits(product.buyPrice))
         {
             inventory.AddNovaCandy(1);
             hud.Refresh();
         }
     }
 
-    public void SellNovaCandy()
+    public void SellProduct()
     {
         if (inventory.RemoveNovaCandy(1))
         {
-            wallet.AddCredits(sellPrice);
+            wallet.AddCredits(product.sellPrice);
             hud.Refresh();
         }
     }
 
-    [ContextMenu("Buy NovaCandy")]
+    [ContextMenu("Buy Product")]
     private void DebugBuy()
     {
-        BuyNovaCandy();
+        BuyProduct();
     }
 
-    [ContextMenu("Sell NovaCandy")]
+    [ContextMenu("Sell Product")]
     private void DebugSell()
     {
-        SellNovaCandy();
+        SellProduct();
     }
 }
