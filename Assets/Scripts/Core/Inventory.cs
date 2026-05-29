@@ -1,24 +1,39 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private int novaCandyAmount = 0;
+    private Dictionary<ProductData, int> products = new();
 
-    public int NovaCandyAmount => novaCandyAmount;
-
-    public void AddNovaCandy(int amount)
+    public int GetAmount(ProductData product)
     {
-        novaCandyAmount += amount;
+        if (products.ContainsKey(product))
+        {
+            return products[product];
+        }
+
+        return 0;
+    }
+
+    public void AddProduct(ProductData product, int amount)
+    {
+        if (!products.ContainsKey(product))
+        {
+            products[product] = 0;
+        }
+        products[product] += amount;
     }
     
-    public bool RemoveNovaCandy(int amount)
+    public bool RemoveProduct(ProductData product, int amount)
     {
-        if(novaCandyAmount <= 0)
+        if(GetAmount(product) < amount)
         {
             return false;
         }
 
-        novaCandyAmount -= amount;
+        products[product] -= amount;
+
         return true;
     }
 }

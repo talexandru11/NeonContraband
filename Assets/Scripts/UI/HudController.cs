@@ -7,6 +7,8 @@ public class HudController : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshProUGUI creditsText;
     [SerializeField] private TextMeshProUGUI inventoryText;
+    [SerializeField] public ProductData product;
+
 
     private void Start()
     {
@@ -16,7 +18,7 @@ public class HudController : MonoBehaviour
     public void Refresh()
     {
         creditsText.text = "Credits: " + wallet.Credits;
-        inventoryText.text = "NovaCandy: " + inventory.NovaCandyAmount;
+        inventoryText.text = "Product: " + inventory.GetAmount(product);
     }
 
 }
