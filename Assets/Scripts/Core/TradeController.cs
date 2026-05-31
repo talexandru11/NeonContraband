@@ -7,7 +7,7 @@ public class TradeController : MonoBehaviour
     [SerializeField] private HudController hud;
     [SerializeField] private ProductData product;
 
-    public void BuyProduct(ProductData product, int amount)
+    public void BuyProduct(ProductData product, int amount = 1)
     {
         if (wallet.SpendCredits(product.buyPrice))
         {
@@ -16,7 +16,7 @@ public class TradeController : MonoBehaviour
         }
     }
 
-    public void SellProduct(ProductData product, int amount)
+    public void SellProduct(ProductData product, int amount = 1)
     {
         if (inventory.RemoveProduct(product,1))
         {
